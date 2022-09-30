@@ -37,33 +37,28 @@ void PrintArray(int[,] numbers)
     }
 }
 
-Console.Write("Введите количество строк: ");
-int linesVol = InNumber();
-Console.Write("Введите количество столбцов: ");
-int columnsVol = InNumber();
-int[,] numbers = new int[linesVol, columnsVol];
+Console.Write("Введите размер квадратного массива: ");
+int massVol = InNumber();
+int[,] numbers = new int[massVol, massVol];
 FillArray(numbers);
-Console.WriteLine();
-Console.WriteLine("Массив до изменения: ");
+Console.WriteLine("Массив: ");
 PrintArray(numbers);
+
+int minsum = Int32.MaxValue;
+int indexLine = 0;
 
 for (int i = 0; i < numbers.GetLength(0); i++)
 {
-    for (int j = 0; j < numbers.GetLength(1) - 1; j++)
+    int sum = 0;
+    for (int j = 0; j < numbers.GetLength(1); j++)
     {
-        for (int z = 0; z < numbers.GetLength(1) - 1; z++)
-        {
-            if (numbers[i, z] < numbers[i, z + 1])
-            {
-                int temp = 0;
-                temp = numbers[i, z];
-                numbers[i, z] = numbers[i, z + 1];
-                numbers[i, z + 1] = temp;
-            }
-        }
+        sum = sum + numbers[i, j];
+    }
+    if (sum < minsum)
+    {
+        minsum = sum;
+        indexLine++;
     }
 }
-Console.WriteLine();
-Console.WriteLine("Массив с упорядоченными значениями: ");
-PrintArray(numbers);
 
+Console.WriteLine($"Cтрока с наименьшей суммой элементов : {indexLine}, суммой елементов равна: {minsum}");

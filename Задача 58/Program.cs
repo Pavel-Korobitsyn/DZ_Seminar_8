@@ -37,33 +37,29 @@ void PrintArray(int[,] numbers)
     }
 }
 
-Console.Write("Введите количество строк: ");
-int linesVol = InNumber();
-Console.Write("Введите количество столбцов: ");
-int columnsVol = InNumber();
-int[,] numbers = new int[linesVol, columnsVol];
-FillArray(numbers);
-Console.WriteLine();
-Console.WriteLine("Массив до изменения: ");
-PrintArray(numbers);
+Console.Write("Введите размер матриццы: ");
+int size = InNumber();
+int[,] matrixA = new int[size, size];
+int[,] matrixB = new int[size, size];
+FillArray(matrixA);
+FillArray(matrixB);
+int[,] matrixC = new int[size, size];
 
-for (int i = 0; i < numbers.GetLength(0); i++)
+for (int i = 0; i < size; i++)
 {
-    for (int j = 0; j < numbers.GetLength(1) - 1; j++)
+    for (int j = 0; j < size; j++)
     {
-        for (int z = 0; z < numbers.GetLength(1) - 1; z++)
+        for (int k = 0; k < size; k++)
         {
-            if (numbers[i, z] < numbers[i, z + 1])
-            {
-                int temp = 0;
-                temp = numbers[i, z];
-                numbers[i, z] = numbers[i, z + 1];
-                numbers[i, z + 1] = temp;
-            }
+            matrixC[i, j] = matrixC[i, j] + (matrixA[i, k] * matrixB[k, j]);
         }
     }
 }
+Console.WriteLine("Матрица - А");
+PrintArray(matrixA);
 Console.WriteLine();
-Console.WriteLine("Массив с упорядоченными значениями: ");
-PrintArray(numbers);
-
+Console.WriteLine("Матрица - В");
+PrintArray(matrixB);
+Console.WriteLine();
+Console.WriteLine("Произведение матриц А*В");
+PrintArray(matrixC);
